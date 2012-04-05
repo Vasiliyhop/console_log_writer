@@ -2,18 +2,26 @@
 var fs = require('fs');
 var util = require('util');
 var logFileName = "log.txt";
-var replaceArr = ['\033[33m','\033[36m','\033[39m','\033[90m','\033[33m','\033[36m','\033[39m','\033[90m'];
 
 module.exports = function(){
     var str = '';
-    var obj = {};
-    for (var i in arguments){
-        obj[i] = arguments[i];
-        for (var j = 0;j<replaceArr.length;j++){
-            obj[i] = obj[i].replace(replaceArr[j],'');
+    var result = '';
+    function str_cut(str){
+        var a = str.indexOf('\033[');
+        if (a>0) {
+            var b = str.indexOf('m',a);
+            var c = str.slice(a,b+1);
+            str = str.replace(c,'');
+            str_cut(str);
+        } else{
+            result = str;
         }
-        str += obj[i];  
     }
+    for (var i in arguments){        
+        str += arguments[i];;  
+    }
+    str_cut(str);
+    str = result;
     var curentDate = new Date();
     var DateData = (curentDate.getMonth()+1)+'.'+curentDate.getDate()+'.'+curentDate.getFullYear()+' ' + curentDate.getHours()+':'+curentDate.getMinutes()+':'+curentDate.getSeconds()+' | ';
     str = DateData+str+"\n";
