@@ -5,23 +5,11 @@ var logFileName = "log.txt";
 
 module.exports = function(){
     var str = '';
-    var result = '';
-    function str_cut(str){
-        var a = str.indexOf('\033[');
-        if (a>0) {
-            var b = str.indexOf('m',a);
-            var c = str.slice(a,b+1);
-            str = str.replace(c,'');
-            str_cut(str);
-        } else{
-            result = str;
-        }
-    }
     for (var i in arguments){        
         str += arguments[i];;  
     }
-    str_cut(str);
-    str = result;
+    var reg = /[\033[]+(\d+)m/g;
+    str = str.replace(reg,'');
     var curentDate = new Date();
     var DateData = (curentDate.getMonth()+1)+'.'+curentDate.getDate()+'.'+curentDate.getFullYear()+' ' + curentDate.getHours()+':'+curentDate.getMinutes()+':'+curentDate.getSeconds()+' | ';
     str = DateData+str+"\n";
