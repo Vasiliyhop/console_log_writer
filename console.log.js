@@ -1,4 +1,4 @@
-// console.log writer v0.1 (c) Vasiliy Shevchuk 2012
+// console.log writer v0.2 (c) Vasiliy Shevchuk 2012
 var fs = require('fs');
 var util = require('util');
 var logFileName = "log.txt";
