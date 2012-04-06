@@ -12,7 +12,7 @@ Next, require `./console.log.js`:
 console.log = require('./console.log.js');
 ```
 
-Next, specify the log file name:
+Next, specify the log file name(default:'log.txt'):
 
 ```js
 console.log.setLogName('log_One.txt');  
@@ -24,6 +24,11 @@ Create log header:
 console.log.setLogHeader();  
 ```
 
+Specify the log data string length(default:54):
+
+```js
+console.log.setStrLength(70);  
+```
 
 
 ## License 
